@@ -1,9 +1,17 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container py-5">
+    <h1 class="mb-4">Daftar Artikel</h1>
     <a href="{{ route('articles.create') }}" class="btn btn-primary w-100 mb-4">Buat Artikel Baru</a>
+    
+    @if (session('success'))
+        <div class="alert alert-success mt-2">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="row">
+    
         <div class="col-md-8">
             <div class="row">
                 @foreach ($articles as $article)
@@ -25,6 +33,14 @@
                             </div>
                             <p class="card-text text-truncate" style="max-width: 100%;">{{ Str::limit($article->content, 100) }}</p>
                             <a href="{{ route('articles.show', $article->id) }}" class="text-decoration-none text-warning fw-bold">Read More →</a>
+                            <div class="mt-3">
+                                <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('articles.destroy', $article->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -32,25 +48,6 @@
             </div>
         </div>
         <div class="col-md-4">
-            {{-- <div class="card p-3 mb-4">
-                <h5>Cari</h5>
-                <form action="{{ route('articles.index') }}" method="GET">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Cari artikel...">
-                        <button class="btn btn-danger" type="submit"><i class="bi bi-search"></i></button>
-                    </div>
-                </form>
-            </div> --}}
-            {{-- <div class="card p-3 mb-4">
-                <h5>Kategori</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-dark">All <span class="badge bg-secondary">7</span></a></li>
-                    <li><a href="#" class="text-dark">News <span class="badge bg-secondary">4</span></a></li>
-                    <li><a href="#" class="text-dark">Event <span class="badge bg-secondary">2</span></a></li>
-                    <li><a href="#" class="text-dark">Promo <span class="badge bg-secondary">0</span></a></li>
-                    <li><a href="#" class="text-dark">Tips <span class="badge bg-secondary">1</span></a></li>
-                </ul>
-            </div> --}}
             <div class="card p-3">
                 <h5>Postingan Terkini</h5>
                 @foreach ($recentArticles as $recent)
