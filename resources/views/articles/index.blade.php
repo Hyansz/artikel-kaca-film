@@ -1,5 +1,34 @@
 @extends('layouts.app')
+
+@section('nav')
+    <div class="text-white text-center" style="background-image: url('{{ asset('images/hero.jpg') }}'); background-size: cover; background-position: center; position: relative;">
+        <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6);"></div>
+        <div class="container position-relative py-3 d-flex justify-content-between">
+            <div>
+                <a href="{{ route('articles.index') }}" class="text-white link-underline link-underline-opacity-0 fw-bold fs-4">KacaFilm</a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <a href="{{ route('articles.index') }}" class="text-white link-underline link-underline-opacity-0">Home</a>
+                <a href="{{ route('articles.index') }}" class="text-white link-underline link-underline-opacity-0">About</a>
+                <a href="{{ route('articles.index') }}" class="text-white link-underline link-underline-opacity-0">Artikel</a>
+                <a href="{{ route('articles.index') }}" class="text-white link-underline link-underline-opacity-0">Contact Us</a>
+            </div>
+        </div>
+        <div class="container position-relative py-5">
+            <h1 class="display-4 fw-bold">News Feed</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">News Feed</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+@endsection
+
 @section('content')
+
+{{-- Main Content --}}
 <div class="container py-5">
     <h1 class="mb-4">Daftar Artikel</h1>
     <a href="{{ route('articles.create') }}" class="btn btn-primary w-100 mb-4">Buat Artikel Baru</a>
@@ -11,7 +40,7 @@
     @endif
 
     <div class="row">
-    
+        {{-- Artikel --}}
         <div class="col-md-8">
             <div class="row">
                 @foreach ($articles as $article)
@@ -47,6 +76,8 @@
                 @endforeach
             </div>
         </div>
+
+        {{-- Sidebar --}}
         <div class="col-md-4">
             <div class="card p-3">
                 <h5>Postingan Terkini</h5>

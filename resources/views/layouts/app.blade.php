@@ -7,11 +7,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a href="{{ route('articles.index') }}" class="navbar-brand">Laravel Blog</a>
-        </div>
-    </nav>
+    <div>
+        @yield('nav')
+    </div>
 
     <div class="container mt-3">
         @yield('content')
