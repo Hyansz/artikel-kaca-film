@@ -90,15 +90,17 @@
             <div class="card p-3">
                 <h5>Postingan Terkini</h5>
                 @foreach ($recentArticles as $recent)
+                <a href="{{ route('articles.show', $recent->id) }}">
                     <div class="d-flex mb-2">
                         @if ($recent->thumbnail)
                             <img src="{{ asset('storage/' . $recent->thumbnail) }}" width="50" class="me-2">
                         @endif
                         <div>
-                            <a href="{{ route('articles.show', $recent->id) }}" class="text-dark d-block">{{ $recent->title }}</a>
+                            <a href="{{ route('articles.show', $recent->id) }}" class="text-dark d-block link-underline link-underline-opacity-0">{{ $recent->title }}</a>
                             <small class="text-muted">{{ date('d M Y', strtotime($recent->created_at)) }}</small>
                         </div>
                     </div>
+                </a>
                 @endforeach
             </div>
         </div>
