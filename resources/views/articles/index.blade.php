@@ -80,6 +80,14 @@
         {{-- Sidebar --}}
         <div class="col-md-4">
             <div class="card p-3">
+                <form action="{{ route('articles.index') }}" method="GET" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Cari artikel..." value="{{ request('search') }}">
+                        <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card p-3">
                 <h5>Postingan Terkini</h5>
                 @foreach ($recentArticles as $recent)
                     <div class="d-flex mb-2">

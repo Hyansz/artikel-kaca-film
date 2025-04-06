@@ -7,9 +7,14 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::latest()->paginate(10);
+        $search = $request->input('search');
+
+        $articles = Article::when($search, function ($query, $search) {
+            return $query->where('title', 'like', "%{$search}%")
+                         ->orWhere('content', 'like', "%{$search}%");
+        })->latest()->get();
         $recentArticles = Article::latest()->take(5)->get();
         
         return view('articles.index', compact('articles', 'recentArticles'));
